@@ -12,7 +12,8 @@ namespace UrbanAirSharp.Request
 	/// </summary>
 	public class TagDeleteRequest : DeleteRequest<BaseResponse>
 	{
-		public TagDeleteRequest(String tag)
+		public TagDeleteRequest(String tag, ServiceModelConfig serviceModelConfig)
+            :base(serviceModelConfig)
 		{
 			RequestUrl = "api/tags/" + tag + "/";
 		}

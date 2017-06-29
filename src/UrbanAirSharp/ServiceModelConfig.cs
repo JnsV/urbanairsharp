@@ -10,26 +10,31 @@ using Newtonsoft.Json.Converters;
 
 namespace UrbanAirSharp
 {
-	public static class ServiceModelConfig
+	public class ServiceModelConfig
 	{
-		public static readonly String Host = "https://go.urbanairship.com/";
-		public static readonly HttpClient HttpClient = new HttpClient();
-		public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings();
+		public readonly String Host = "https://go.urbanairship.com/";
+		public readonly HttpClient HttpClient = new HttpClient();
+		public readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings();
 
-		public static void Create(String uaAppKey, String uaAppMAsterSecret)
-		{
-			var auth = String.Format("{0}:{1}", uaAppKey, uaAppMAsterSecret);
-			auth = Convert.ToBase64String(Encoding.ASCII.GetBytes(auth));
+	    public static ServiceModelConfig Create(String uaAppKey, String uaAppMAsterSecret)
+	    {
+	        return new ServiceModelConfig(uaAppKey, uaAppMAsterSecret);
+	    }
 
-			SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+        public ServiceModelConfig(String uaAppKey, String uaAppMAsterSecret)
+        {
+            var auth = String.Format("{0}:{1}", uaAppKey, uaAppMAsterSecret);
+            auth = Convert.ToBase64String(Encoding.ASCII.GetBytes(auth));
+
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+            HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/vnd.urbanairship+json; version=3;");
+            //System.Net.ServicePointManager.Expect100Continue = false;
+            SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
 			SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 			SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
 			SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
 			SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
 			SerializerSettings.DateFormatString = "yyyy-MM-ddTH:mm:ss";
-
-			HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
-			HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/vnd.urbanairship+json; version=3;");
 		}
 	}
 }

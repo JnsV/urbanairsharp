@@ -11,7 +11,8 @@ namespace UrbanAirSharp.Request
 	/// </summary>
 	public class ScheduleListRequest : GetRequest<ScheduleListResponse>
 	{
-		public ScheduleListRequest()
+		public ScheduleListRequest(ServiceModelConfig serviceModelConfig)
+            : base(serviceModelConfig)
 		{
 			RequestUrl = "api/schedules/";
 		}

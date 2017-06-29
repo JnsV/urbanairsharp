@@ -12,8 +12,8 @@ namespace UrbanAirSharp.Request
 	/// </summary>
 	public class PushRequest : PostRequest<PushResponse, Push>
 	{
-		public PushRequest(Push push)
-			: base(push)
+		public PushRequest(Push push, ServiceModelConfig serviceModelConfig)
+			: base(push, serviceModelConfig)
 		{
 			RequestUrl = "api/push/";
 		}

@@ -23,8 +23,8 @@ namespace UrbanAirSharp.Request.Base
 
 		protected TContent Content;
 		
-		public PostRequest(TContent content)
-			: base(ServiceModelConfig.Host, ServiceModelConfig.HttpClient, ServiceModelConfig.SerializerSettings)
+		public PostRequest(TContent content, ServiceModelConfig serviceModelConfig)
+			: base(serviceModelConfig.Host, serviceModelConfig.HttpClient, serviceModelConfig.SerializerSettings)
 		{
 			RequestMethod = HttpMethod.Post;
 			Content = content;
@@ -38,9 +38,10 @@ namespace UrbanAirSharp.Request.Base
 
 			Log.Debug("Payload - " + json);
 
-			var response = await HttpClient.PostAsync(Host + RequestUrl, new StringContent(json, Encoding, MediaType));
-
-			return await DeserializeResponseAsync(response);
+            using (var response = await HttpClient.PostAsync(Host + RequestUrl, new StringContent(json, Encoding, MediaType)))
+            { 
+                return await DeserializeResponseAsync(response);
+            }
 		}
 	}
 }

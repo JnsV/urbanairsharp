@@ -12,8 +12,8 @@ namespace UrbanAirSharp.Request
 	/// </summary>
 	public class TagCreateRequest : PutRequest<BaseResponse, Tag>
 	{
-		public TagCreateRequest(Tag tag)
-			: base(tag)
+		public TagCreateRequest(Tag tag, ServiceModelConfig serviceModelConfig)
+			: base(tag, serviceModelConfig)
 		{
 			RequestUrl = "api/tags/" + tag.TagName + "/";
 		}
