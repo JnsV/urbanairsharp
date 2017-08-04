@@ -42,11 +42,13 @@ namespace UrbanAirSharp
 	public class UrbanAirSharpGateway
 	{
 		private static readonly ILog Log = LogManager.GetLogger(typeof(UrbanAirSharpGateway));
+	    private readonly ServiceModelConfig serviceModelConfig;
 
-		public UrbanAirSharpGateway(String appKey, String appMasterSecret)
+
+        public UrbanAirSharpGateway(String appKey, String appMasterSecret)
 		{
 			XmlConfigurator.Configure();
-			ServiceModelConfig.Create(appKey, appMasterSecret);
+			serviceModelConfig = ServiceModelConfig.Create(appKey, appMasterSecret);
 		}
 
 		/// <summary>
@@ -63,7 +65,7 @@ namespace UrbanAirSharp
 		/// <returns></returns>
 		public PushResponse Push(String alert, IList<DeviceType> deviceTypes = null, String deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)
 		{
-			return SendRequest(new PushRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience)));
+			return SendRequest(new PushRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience), serviceModelConfig));
 		}
 
 		/// <summary>
@@ -78,32 +80,32 @@ namespace UrbanAirSharp
 		public PushResponse Validate(String alert, IList<DeviceType> deviceTypes = null, String deviceId = null,
 			IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)
 		{
-			return SendRequest(new PushValidateRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience)));
+			return SendRequest(new PushValidateRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience), serviceModelConfig));
 		}
 
 		public ScheduleCreateResponse CreateSchedule(Schedule schedule)
         {
-			return SendRequest(new ScheduleCreateRequest(schedule));
+			return SendRequest(new ScheduleCreateRequest(schedule, serviceModelConfig));
         }
 
 		public ScheduleEditResponse EditSchedule(Guid scheduleId, Schedule schedule)
         {
-			return SendRequest(new ScheduleEditRequest(scheduleId, schedule));
+			return SendRequest(new ScheduleEditRequest(scheduleId, schedule, serviceModelConfig));
         }
 
 		public BaseResponse DeleteSchedule(Guid scheduleId)
         {
-			return SendRequest(new ScheduleDeleteRequest(scheduleId));
+			return SendRequest(new ScheduleDeleteRequest(scheduleId, serviceModelConfig));
         }
 
         public ScheduleGetResponse GetSchedule(Guid scheduleId)
         {
-			return SendRequest(new ScheduleGetRequest(scheduleId));
+			return SendRequest(new ScheduleGetRequest(scheduleId, serviceModelConfig));
         }
 
         public ScheduleListResponse ListSchedules()
         {
-			return SendRequest(new ScheduleListRequest());
+			return SendRequest(new ScheduleListRequest(serviceModelConfig));
         }
 
 		/// <summary>
@@ -127,7 +129,7 @@ namespace UrbanAirSharp
 			if (string.IsNullOrEmpty(deviceToken.Token))
 				throw new ArgumentException("A device Tokens Token field is Required", "deviceToken");
 
-			return SendRequest(new DeviceTokenRequest(deviceToken));
+			return SendRequest(new DeviceTokenRequest(deviceToken, serviceModelConfig));
 		}
 
 		public BaseResponse CreateTag(Tag tag)
@@ -135,7 +137,7 @@ namespace UrbanAirSharp
 			if (string.IsNullOrEmpty(tag.TagName))
 				throw new ArgumentException("A tag name is Required", "tag.TagName");
 
-			return SendRequest(new TagCreateRequest(tag));
+			return SendRequest(new TagCreateRequest(tag, serviceModelConfig));
 		}
 
 		public BaseResponse DeleteTag(string tag)
@@ -143,12 +145,12 @@ namespace UrbanAirSharp
 			if (string.IsNullOrEmpty(tag))
 				throw new ArgumentException("A tag is Required", "tag");
 
-			return SendRequest(new TagDeleteRequest(tag));
+			return SendRequest(new TagDeleteRequest(tag, serviceModelConfig));
 		}
 
 		public TagListResponse ListTags()
 		{
-			return SendRequest(new TagListRequest());
+			return SendRequest(new TagListRequest(serviceModelConfig));
 		}
 
 		public static Push CreatePush(String alert, IList<DeviceType> deviceTypes = null, String deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)

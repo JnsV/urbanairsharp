@@ -14,8 +14,8 @@ namespace UrbanAirSharp.Request.Base
 
         protected TContent Content;
 
-		public PutRequest(TContent content)
-			: base(ServiceModelConfig.Host, ServiceModelConfig.HttpClient, ServiceModelConfig.SerializerSettings)
+		public PutRequest(TContent content, ServiceModelConfig serviceModelConfig)
+			: base(serviceModelConfig.Host, serviceModelConfig.HttpClient, serviceModelConfig.SerializerSettings)
         {
 			RequestMethod = HttpMethod.Put;
             Content = content;

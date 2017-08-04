@@ -11,7 +11,8 @@ namespace UrbanAirSharp.Request
 	/// </summary>
 	public class TagListRequest : GetRequest<TagListResponse>
 	{
-		public TagListRequest()
+		public TagListRequest(ServiceModelConfig serviceModelConfig)
+            : base(serviceModelConfig)
 		{
 			RequestUrl = "api/tags/";
 		}
