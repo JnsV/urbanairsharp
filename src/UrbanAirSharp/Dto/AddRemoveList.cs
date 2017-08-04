@@ -8,9 +8,9 @@ namespace UrbanAirSharp.Dto
 	public class AddRemoveList
 	{
 		[JsonProperty("add")]
-		public IList<String> Add { get; set; }
+		public IList<string> Add { get; set; }
 
 		[JsonProperty("remove")]
-		public IList<String> Remove { get; set; }
+		public IList<string> Remove { get; set; }
 	}
 }

@@ -18,6 +18,6 @@ namespace UrbanAirSharp.Response
 		public List<Guid> UrlIds { get; set; }
 
 		[JsonProperty("content_urls")]
-		public List<String> ContentUrls { get; set; }
+		public List<string> ContentUrls { get; set; }
 	}
 }

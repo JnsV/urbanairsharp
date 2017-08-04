@@ -7,9 +7,9 @@ namespace UrbanAirSharp.Dto
 	public class WindowsPhoneAlert : BaseAlert
 	{
 		[JsonProperty("toast")]
-		public String Toast { get; set; }
+		public string Toast { get; set; }
 
 		[JsonProperty("tile")]
-		public String Tile { get; set; }
+		public string Tile { get; set; }
 	}
 }

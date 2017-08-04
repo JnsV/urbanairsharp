@@ -7,6 +7,6 @@ namespace UrbanAirSharp.Dto
 	public class BaseAlert
 	{
 		[JsonProperty("alert")]
-		public String Alert { get; set; }
+		public string Alert { get; set; }
 	}
 }

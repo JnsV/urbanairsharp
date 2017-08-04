@@ -10,28 +10,28 @@ namespace UrbanAirSharp.Dto
 	public class Audience
 	{
 		[JsonProperty("apid")]
-		public String AndroidDeviceId { get; private set; }
+		public string AndroidDeviceId { get; private set; }
 
 		[JsonProperty("device_token")]
-		public String IosDeviceId { get; private set; }
+		public string IosDeviceId { get; private set; }
 
 		[JsonProperty("wns")]
-		public String WindowsId { get; private set; }
+		public string WindowsId { get; private set; }
 
 		[JsonProperty("mpns")]
-		public String WindowsPhoneId { get; private set; }
+		public string WindowsPhoneId { get; private set; }
 
 		[JsonProperty("device_pin")]
-		public String BlackberryId { get; private set; }
+		public string BlackberryId { get; private set; }
 
 		[JsonProperty("segment")]
-		public String SegmentId { get; private set; }
+		public string SegmentId { get; private set; }
 
 		[JsonProperty("alias")]
-		public String Alias { get; private set; }
+		public string Alias { get; private set; }
 
 		[JsonProperty("tag")]
-		public String Tag { get; private set; }
+		public string Tag { get; private set; }
 
 		[JsonProperty("OR")]
 		public IList<Audience> Or { get; private set; }
@@ -46,7 +46,7 @@ namespace UrbanAirSharp.Dto
 		{
 		}
 
-		public Audience(AudienceType type, String value)
+		public Audience(AudienceType type, string value)
 		{
 			switch (type)
 			{

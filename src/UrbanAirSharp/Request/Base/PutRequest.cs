@@ -10,7 +10,7 @@ namespace UrbanAirSharp.Request.Base
 	public class PutRequest<TResponse, TContent> : BaseRequest<TResponse> where TResponse : BaseResponse, new()
 	{
         public readonly Encoding Encoding = Encoding.UTF8;
-        public const String MediaType = "application/json";
+        public const string MediaType = "application/json";
 
         protected TContent Content;
 
