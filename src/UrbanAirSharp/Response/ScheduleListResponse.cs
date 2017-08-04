@@ -16,7 +16,7 @@ namespace UrbanAirSharp.Response
 		public int? Total { get; set; }
 
 		[JsonProperty("next_page")]
-		public String NextPageUrl { get; set; }
+		public string NextPageUrl { get; set; }
 
 		[JsonProperty("schedules")]
 		public IList<Schedule> Schedules { get; set; }

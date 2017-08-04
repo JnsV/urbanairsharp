@@ -8,7 +8,7 @@ namespace UrbanAirSharp.Dto
 	public class AndroidAlert : BaseAlert
 	{
 		[JsonProperty("collapse_key")]
-		public String CollapseKey { get; set; }
+		public string CollapseKey { get; set; }
 
 		[JsonProperty("time_to_live")]
 		public int GcmTimeToLive { get; set; }
@@ -17,6 +17,6 @@ namespace UrbanAirSharp.Dto
 		public bool DelayWhileIdle { get; set; }
 
 		[JsonProperty("extra")]
-		public Dictionary<String, String> Extras { get; set; }
+		public Dictionary<string, string> Extras { get; set; }
 	}
 }

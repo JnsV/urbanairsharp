@@ -7,12 +7,12 @@ namespace UrbanAirSharp.Dto
 	public class WindowsAlert : BaseAlert
 	{
 		[JsonProperty("toast")]
-		public String Toast { get; set; }
+		public string Toast { get; set; }
 
 		[JsonProperty("tile")]
-		public String Tile { get; set; }
+		public string Tile { get; set; }
 
 		[JsonProperty("badge")]
-		public String Badge { get; set; }
+		public string Badge { get; set; }
 	}
 }

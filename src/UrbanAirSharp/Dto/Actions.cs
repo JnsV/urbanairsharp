@@ -14,9 +14,9 @@ namespace UrbanAirSharp.Dto
 		public OpenAction OpenAction { get; set; }
 
 		[JsonProperty("add_tag")]
-		public IList<String> AddTags { get; set; }
+		public IList<string> AddTags { get; set; }
 
 		[JsonProperty("remove_tag")]
-		public IList<String> RemoveTags { get; set; }
+		public IList<string> RemoveTags { get; set; }
 	}
 }

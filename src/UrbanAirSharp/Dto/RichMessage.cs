@@ -18,21 +18,21 @@ namespace UrbanAirSharp.Dto
 	public class RichMessage
 	{
 		[JsonProperty("title")]
-		public String Title { get; set; }
+		public string Title { get; set; }
 
 		[JsonProperty("body")]
-		public String Body { get; set; }
+		public string Body { get; set; }
 
 		[JsonProperty("content_type")]
-		public String ContentType { get; set; }
+		public string ContentType { get; set; }
 
 		[JsonProperty("content_encoding")]
-		public String ContentEncoding { get; set; }
+		public string ContentEncoding { get; set; }
 
 		[JsonProperty("extra")]
-		public IDictionary<String,String> Extras { get; set; }
+		public IDictionary<string,string> Extras { get; set; }
 
 		[JsonProperty("icons")]
-		public IDictionary<String, String> Icons { get; set; }
+		public IDictionary<string, string> Icons { get; set; }
 	}
 }

@@ -7,7 +7,7 @@ namespace UrbanAirSharp.Dto
 	public class Notification
 	{
 		[JsonProperty("alert")]
-		public String DefaultAlert { get; set; }
+		public string DefaultAlert { get; set; }
 
 		[JsonProperty("android")]
 		public AndroidAlert AndroidAlert { get; set; }

@@ -19,7 +19,7 @@ namespace UrbanAirSharp.Request.Base
 	{
 		//TODO: PostRequest shouldn't declate this - should be more abstract
 		public readonly Encoding Encoding = Encoding.UTF8;
-		public const String MediaType = "application/json";
+		public const string MediaType = "application/json";
 
 		protected TContent Content;
 		
@@ -38,10 +38,13 @@ namespace UrbanAirSharp.Request.Base
 
 			Log.Debug("Payload - " + json);
 
-            using (var response = await HttpClient.PostAsync(Host + RequestUrl, new StringContent(json, Encoding, MediaType)))
-            { 
-                return await DeserializeResponseAsync(response);
-            }
+            StringContent httpContent = new StringContent(json, Encoding, MediaType);
+            httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+		    using (var response = await HttpClient.PostAsync(Host + RequestUrl, httpContent))
+		    {
+		        return await DeserializeResponseAsync(response);
+		    }
 		}
 	}
 }

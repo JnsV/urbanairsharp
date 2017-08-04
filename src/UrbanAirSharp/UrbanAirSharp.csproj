@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UrbanAirSharp</RootNamespace>
-    <AssemblyName>UrbanAirSharp</AssemblyName>
+    <AssemblyName>UrbanAirSharp.Mk2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -25,17 +25,19 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=11.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,9 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\Association.cs" />
     <Compile Include="Dto\BaseAlert.cs" />
+    <Compile Include="Dto\Channel.cs" />
     <Compile Include="Dto\DeviceToken.cs" />
     <Compile Include="Dto\AddRemoveList.cs" />
+    <Compile Include="Dto\NamedUser.cs" />
     <Compile Include="Dto\OpenAction.cs" />
     <Compile Include="Dto\AndroidAlert.cs" />
     <Compile Include="Dto\Audience.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="Dto\ScheduleInfo.cs" />
     <Compile Include="Dto\Schedule.cs" />
     <Compile Include="Dto\Tag.cs" />
+    <Compile Include="Dto\TagGroups.cs" />
     <Compile Include="Dto\WindowsAlert.cs" />
     <Compile Include="Dto\WindowsPhoneAlert.cs" />
     <Compile Include="Request\Base\DeleteRequest.cs" />
@@ -72,6 +78,10 @@
     <Compile Include="Request\Base\PostRequest.cs" />
     <Compile Include="Request\Base\PutRequest.cs" />
     <Compile Include="Request\DeviceTokenRequest.cs" />
+    <Compile Include="Request\NamedUserAssociationRequest.cs" />
+    <Compile Include="Request\NamedUserDisassocationRequest.cs" />
+    <Compile Include="Request\NamedUserRequest.cs" />
+    <Compile Include="Request\NamedUsersListRequest.cs" />
     <Compile Include="Request\TagDeleteRequest.cs" />
     <Compile Include="Request\TagCreateRequest.cs" />
     <Compile Include="Request\TagListRequest.cs" />
@@ -80,7 +90,10 @@
     <Compile Include="Request\ScheduleListRequest.cs" />
     <Compile Include="Request\ScheduleEditRequest.cs" />
     <Compile Include="Request\ScheduleCreateRequest.cs" />
+    <Compile Include="Response\NamedUserResponse.cs" />
+    <Compile Include="Response\NamedUsersListResponse.cs" />
     <Compile Include="Response\PushResponse.cs" />
+    <Compile Include="Response\ResponseObject.cs" />
     <Compile Include="Response\ScheduleEditResponse.cs" />
     <Compile Include="Response\ScheduleGetResponse.cs" />
     <Compile Include="Response\ScheduleListResponse.cs" />

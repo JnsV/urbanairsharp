@@ -9,6 +9,6 @@ namespace UrbanAirSharp.Response
 	public class TagListResponse : BaseResponse
 	{
 		[JsonProperty("tags")]
-		public List<String> Tags { get; set; }
+		public List<string> Tags { get; set; }
 	}
 }

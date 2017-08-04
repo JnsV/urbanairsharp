@@ -6,7 +6,7 @@ namespace UrbanAirSharp.Dto
 	public class Tag
 	{
 		[JsonIgnore]
-		public String TagName;
+		public string TagName;
 
 		[JsonProperty("ios_channels")]
 		public AddRemoveList IosChannels { get; set; }

@@ -10,7 +10,7 @@ namespace UrbanAirSharp.Response
 	public class ScheduleGetResponse : BaseResponse
 	{
 		[JsonProperty("name")]
-		public String Name { private get; set; }
+		public string Name { private get; set; }
 
 		[JsonProperty("schedule")]
 		public ScheduleInfo ScheduleInfo { private get; set; }
@@ -19,7 +19,7 @@ namespace UrbanAirSharp.Response
 		public Push Push { private get; set; }
 
 		[JsonProperty("push_ids")]
-		public List<String> PushIds { private get; set; }
+		public List<string> PushIds { private get; set; }
 
 		[JsonIgnore]
 		public Schedule Schedule;
@@ -28,7 +28,7 @@ namespace UrbanAirSharp.Response
 		/// Set by server in responses, ignored in requests
 		/// </summary>
 		[JsonProperty("url")]
-		public String Url { private get; set; }
+		public string Url { private get; set; }
 
 		public override void OnDeserialised()
 		{

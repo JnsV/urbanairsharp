@@ -11,7 +11,7 @@ namespace UrbanAirSharp.Dto
 	public class Schedule
 	{
 		[JsonProperty("name")]
-		public String Name { get; set; }
+		public string Name { get; set; }
 
 		[JsonProperty("schedule")]
 		public ScheduleInfo ScheduleInfo { get; set; }
@@ -20,15 +20,15 @@ namespace UrbanAirSharp.Dto
 		public Push Push { get; set; }
 
 		[JsonProperty("push_ids")]
-		public List<String> PushIds { get; set; }
+		public List<string> PushIds { get; set; }
 
-		private String _url;
+		private string _url;
 
 		/// <summary>
 		/// Set by server in responses, ignored in requests
 		/// </summary>
 		[JsonProperty("url")]
-		public String Url
+		public string Url
 		{
 			get { return _url; }
 			set
