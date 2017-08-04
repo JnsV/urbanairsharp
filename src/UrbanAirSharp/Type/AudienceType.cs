@@ -11,6 +11,7 @@ namespace UrbanAirSharp.Type
 		Blackberry,
 		Segment,
 		Alias,
-		Tag
-	}
+		Tag,
+        NamedUser
+    }
 }

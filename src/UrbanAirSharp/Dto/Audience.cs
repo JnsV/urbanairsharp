@@ -33,7 +33,10 @@ namespace UrbanAirSharp.Dto
 		[JsonProperty("tag")]
 		public string Tag { get; private set; }
 
-		[JsonProperty("OR")]
+	    [JsonProperty("named_user")]
+	    public string NamedUser { get; private set; }
+
+        [JsonProperty("OR")]
 		public IList<Audience> Or { get; private set; }
 
 		[JsonProperty("AND")]
@@ -73,6 +76,9 @@ namespace UrbanAirSharp.Dto
 					break;
 				case AudienceType.Tag:
 					Tag = value;
+					break;
+				case AudienceType.NamedUser:
+					NamedUser = value;
 					break;
 			}
 		}
@@ -124,6 +130,7 @@ namespace UrbanAirSharp.Dto
 			SegmentId = null;
 			Alias = null;
 			Tag = null;
+			NamedUser = null;
 			Or = null;
 			And = null;
 			Not = null;
