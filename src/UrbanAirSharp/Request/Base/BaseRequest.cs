@@ -3,7 +3,6 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using log4net;
 using Newtonsoft.Json;
 using UrbanAirSharp.Response;
 
@@ -17,8 +16,6 @@ namespace UrbanAirSharp.Request.Base
 		protected string Host;
 		protected string RequestUrl;
 		protected HttpMethod RequestMethod;
-
-		protected static readonly ILog Log = LogManager.GetLogger(typeof(TResponse));
 
 		protected BaseRequest(string host, HttpClient httpClient, JsonSerializerSettings serializerSettings)
 		{
@@ -43,8 +40,6 @@ namespace UrbanAirSharp.Request.Base
 		{
 			var contentJson = await response.Content.ReadAsStringAsync();
 
-			Log.Info("Response - (" + response.StatusCode + ") - " + contentJson);
-
 			TResponse result;
 
 			try
@@ -54,7 +49,6 @@ namespace UrbanAirSharp.Request.Base
 			catch (Exception e)
 			{
 				//Some calls to Urban Airship don't return with valid JSON :(
-				Log.Debug("DeserializeResponseAsync - The server did not respond with valid JSON", e);
 				result = new TResponse
 				{
 					Message = "The server did not response with proper JSON (" + contentJson + ")"

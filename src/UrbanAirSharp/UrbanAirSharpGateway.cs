@@ -7,11 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-using JetBrains.Annotations;
-
-using log4net;
-using log4net.Config;
-
 using UrbanAirSharp.Dto;
 using UrbanAirSharp.Request;
 using UrbanAirSharp.Request.Base;
@@ -50,7 +45,6 @@ namespace UrbanAirSharp
         /// <summary>
         /// Log4Net Logger
         /// </summary>
-		private static readonly ILog Log = LogManager.GetLogger(typeof(UrbanAirSharpGateway));
 	    private readonly ServiceModelConfig serviceModelConfig;
 
         /// <summary>
@@ -60,7 +54,6 @@ namespace UrbanAirSharp
         /// <param name="appMasterSecret">Application Master Secret</param>
         public UrbanAirSharpGateway(string appKey, string appMasterSecret)
         {
-            XmlConfigurator.Configure();
             serviceModelConfig = ServiceModelConfig.Create(appKey, appMasterSecret);
         }
 
@@ -343,7 +336,7 @@ namespace UrbanAirSharp
         /// <returns>Task</returns>
         [SuppressMessage(@"ReSharper", @"ConsiderUsingAsyncSuffix")]
         [SuppressMessage(@"ReSharper", @"IdentifierWordIsNotInDictionary")]
-        private static async Task<TResult> Awaitable<TResult>([NotNull] Func<TResult> fct, bool awaitConfig)
+        private static async Task<TResult> Awaitable<TResult>(Func<TResult> fct, bool awaitConfig)
         {
             return await Task.Run(fct).ConfigureAwait(awaitConfig);
         }
@@ -354,7 +347,7 @@ namespace UrbanAirSharp
         /// <typeparam name="TResponse">The expected Response Type</typeparam>
         /// <param name="baseRequest">Request Data</param>
         /// <returns>Service Response</returns>
-        private static TResponse SendRequest<TResponse>([NotNull] BaseRequest<TResponse> baseRequest) where TResponse : BaseResponse, new()
+        private static TResponse SendRequest<TResponse>(BaseRequest<TResponse> baseRequest) where TResponse : BaseResponse, new()
         {
             Func<BaseRequest<TResponse>, TResponse> innerAction = (request) =>
             {
@@ -366,8 +359,6 @@ namespace UrbanAirSharp
                 }
                 catch (Exception e)
                 {
-                    Log.Error(request.GetType().FullName, e);
-
                     return new TResponse()
                     {
                         Error = e.InnerException != null ? e.InnerException.Message : e.Message,

@@ -22,8 +22,6 @@ namespace UrbanAirSharp.Request.Base
 
 		public override async Task<TResponse> ExecuteAsync()
 		{
-			Log.Debug(RequestMethod + " - " + Host + RequestUrl);
-
 			var response = await HttpClient.GetAsync(Host + RequestUrl);
 
 			return await DeserializeResponseAsync(response);
