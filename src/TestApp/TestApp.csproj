@@ -49,9 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UrbanAirSharp\UrbanAirSharp.csproj">
+    <ProjectReference Include="..\UrbanAirSharp\UrbanAirSharp.NetStandard.csproj">
       <Project>{21de41e4-9100-4cd0-9e6d-07e459e7c80f}</Project>
-      <Name>UrbanAirSharp</Name>
+      <Name>UrbanAirSharp.NetStandard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

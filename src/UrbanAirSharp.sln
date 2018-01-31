@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanAirSharp", "UrbanAirSharp\UrbanAirSharp.csproj", "{21DE41E4-9100-4CD0-9E6D-07E459E7C80F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanAirSharp.NetStandard", "UrbanAirSharp\UrbanAirSharp.NetStandard.csproj", "{21DE41E4-9100-4CD0-9E6D-07E459E7C80F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{3842F246-CBB8-4F29-994E-6A12CAF3E6AC}"
 EndProject
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6279D9F-536E-421E-8412-4FF0D482E609}
 	EndGlobalSection
 EndGlobal
