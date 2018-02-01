@@ -68,12 +68,13 @@ namespace UrbanAirSharp
         /// <param name="deviceAlerts">per device alert messages and extras</param>
         /// <param name="customAudience">a more specific way to choose the audience for the
         /// push. If this is set, deviceId is ignored</param>
+        /// <param name="inAppMessage">optional in-app message object to be pushed</param>
         /// <returns>
         /// Service Response
         /// </returns>
-        public PushResponse Push(string alert, IList<DeviceType> deviceTypes = null, string deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)
+        public PushResponse Push(string alert, IList<DeviceType> deviceTypes = null, string deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null, InApp inAppMessage = null)
         {
-            return SendRequest(new PushRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience), serviceModelConfig));
+            return SendRequest(new PushRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience, inAppMessage), serviceModelConfig));
         }
 
         /// <summary>
@@ -84,11 +85,11 @@ namespace UrbanAirSharp
         /// <param name="deviceId">use null for broadcast or deviceTypes must contain 1 element that distinguishes this deviceId</param>
         /// <param name="deviceAlerts">per device alert messages and extras</param>
         /// <param name="customAudience">a more specific way to choose the audience for the push. If this is set, deviceId is ignored</param>
+        /// <param name="inAppMessage">optional in-app message object to be pushed</param>
         /// <returns>Service Response</returns>
-        public PushResponse Validate(string alert, IList<DeviceType> deviceTypes = null, string deviceId = null,
-            IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)
+        public PushResponse Validate(string alert, IList<DeviceType> deviceTypes = null, string deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null, InApp inAppMessage = null)
         {
-            return SendRequest(new PushValidateRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience), serviceModelConfig));
+            return SendRequest(new PushValidateRequest(CreatePush(alert, deviceTypes, deviceId, deviceAlerts, customAudience, inAppMessage), serviceModelConfig));
         }
 
         /// <summary>
@@ -256,14 +257,19 @@ namespace UrbanAirSharp
         /// <exception cref="ArgumentNullException">Linq source or predicate is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">index is not a valid index in the <see cref="T:System.Collections.Generic.IList`1" />.</exception>
         /// <exception cref="NotSupportedException">The property is set and the <see cref="T:System.Collections.Generic.IList`1" /> is read-only.</exception>
-        public static Push CreatePush(string alert, IList<DeviceType> deviceTypes = null, string deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null)
+        public static Push CreatePush(string alert, IList<DeviceType> deviceTypes = null, string deviceId = null, IList<BaseAlert> deviceAlerts = null, Audience customAudience = null, InApp inApp = null)
         {
             var push = new Push()
             {
-                Notification = new Notification()
-                {
-                    DefaultAlert = alert
-                }
+                Notification =
+                string.IsNullOrEmpty(alert) ? 
+                    null : 
+                    new Notification()
+                    {
+                        DefaultAlert = alert
+                    },
+
+                InApp = inApp
             };
 
             if (customAudience != null)

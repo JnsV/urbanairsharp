@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UrbanAirSharp.NetStandard.Dto;
 using UrbanAirSharp.Type;
 
 namespace UrbanAirSharp.Dto
@@ -12,7 +13,8 @@ namespace UrbanAirSharp.Dto
 	/// Send a push notification to a specified device or list of devices
 	/// 
 	/// audience - Required
-	/// notification - Required
+	/// notification - Optional, leave as null if you only want to send an in-app message
+    /// in_app - Optional
 	/// device_types - Required
 	/// 
 	/// options - optionally specify an expiry date
@@ -25,6 +27,9 @@ namespace UrbanAirSharp.Dto
 	{
 		[JsonProperty("notification")]
 		public Notification Notification { get; set; }
+
+        [JsonProperty("in_app")]
+        public InApp InApp { get; set; }
 
 		private Audience _audience;
 
