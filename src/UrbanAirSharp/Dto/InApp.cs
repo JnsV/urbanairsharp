@@ -32,6 +32,6 @@ namespace UrbanAirSharp.Dto
         /// Expiry of the In-App message.
         /// </summary>
         [JsonProperty("expiry")]
-        public DateTime Expiry { get; set; }
+        public DateTime? Expiry { get; set; }
     }
 }
