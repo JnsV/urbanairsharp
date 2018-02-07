@@ -212,6 +212,7 @@ namespace UrbanAirSharp
         /// <param name="tag">Tag Value</param>
         /// <returns>Service Response</returns>
         /// <exception cref="ArgumentException">A tag name is Required</exception>
+        [Obsolete("Use new Tags api for channels and named users")]
         public BaseResponse CreateTag(Tag tag)
         {
             if (string.IsNullOrEmpty(tag.TagName))
@@ -226,6 +227,7 @@ namespace UrbanAirSharp
         /// <param name="tag">Tag name</param>
         /// <returns>Service Response</returns>
         /// <exception cref="ArgumentException">A tag is Required</exception>
+        [Obsolete("Use new Tags api for channels and named users")]
         public BaseResponse DeleteTag(string tag)
         {
             if (string.IsNullOrEmpty(tag))
@@ -237,10 +239,32 @@ namespace UrbanAirSharp
         /// <summary>
         /// Get a List of Tags
         /// </summary>
-	    /// <returns>Service Response</returns>
-		public TagListResponse ListTags()
+        /// <returns>Service Response</returns>
+        [Obsolete("Use new Tags api for channels and named users")]
+        public TagListResponse ListTags()
         {
             return SendRequest(new TagListRequest(serviceModelConfig));
+        }
+
+        /// <summary>
+        /// Update tags for a list of named users. If set tag group is filled, there can be no added or removed tag groups.
+        /// https://docs.urbanairship.com/api/ua/#api-named-users-tags
+        /// </summary>
+        /// <param name="namedUserIds">List of affected named user IDs</param>
+        /// <param name="addedTagGroups">List of added tag groups</param>
+        /// <param name="removedTagGroups">List of removed tag groups</param>
+        /// <param name="setTagGroups">List of set tag group.</param>
+        /// <returns></returns>
+        public BaseResponse UpdateNamedUserTags(List<string> namedUserIds, List<NamedList> addedTagGroups, List<NamedList> removedTagGroups, List<NamedList> setTagGroups)
+        {
+            var tagGroupCount = addedTagGroups?.Count ?? 0 + removedTagGroups?.Count ?? 0 + setTagGroups?.Count ?? 0;
+            if (tagGroupCount == 0)
+                throw new ArgumentException("One or more of the added, removed, or set tag groups must be present");
+
+            if (setTagGroups?.Count > 0 && (addedTagGroups?.Count ?? 0 + removedTagGroups?.Count ?? 0) > 0)
+                throw new ArgumentException("If set tag group is filled, there can be no added or removed tag groups");
+
+            return SendRequest(new NamedUsersTagRequest(new NamedUserTagUpdate { NamedUserIds = namedUserIds, AddedTagGroups = addedTagGroups, RemoveTagGroups = removedTagGroups, SetTagGroups = setTagGroups }, serviceModelConfig));
         }
 
         /// <summary>
