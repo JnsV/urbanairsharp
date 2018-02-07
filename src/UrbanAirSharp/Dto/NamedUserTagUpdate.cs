@@ -2,30 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UrbanAirSharp.Dto.Json;
 
 namespace UrbanAirSharp.Dto
 {
+    [JsonConverter(typeof(NamedUserTagUpdateConverter))]
     public class NamedUserTagUpdate
     {
-        [JsonIgnore]
         public List<string> NamedUserIds { get; set; }
 
-        [JsonProperty("audience")]
-        public IReadOnlyList<NamedList> Audience
-        {
-            get
-            {
-                return new List<NamedList> { new NamedList { ListName = "named_user_id", ElementList = NamedUserIds } }.AsReadOnly();
-            }
-        }
+        public List<TagGroup> AddedTagGroups { get; set; }
 
-        [JsonProperty("add")]
-        public List<NamedList> AddedTagGroups { get; set; }
+        public List<TagGroup> RemoveTagGroups { get; set; }
 
-        [JsonProperty("remove")]
-        public List<NamedList> RemoveTagGroups { get; set; }
-
-        [JsonProperty("set")]
-        public List<NamedList> SetTagGroups { get; set; }
+        public List<TagGroup> SetTagGroups { get; set; }
     }
 }

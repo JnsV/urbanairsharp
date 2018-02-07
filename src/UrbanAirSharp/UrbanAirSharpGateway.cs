@@ -255,7 +255,7 @@ namespace UrbanAirSharp
         /// <param name="removedTagGroups">List of removed tag groups</param>
         /// <param name="setTagGroups">List of set tag group.</param>
         /// <returns></returns>
-        public BaseResponse UpdateNamedUserTags(List<string> namedUserIds, List<NamedList> addedTagGroups, List<NamedList> removedTagGroups, List<NamedList> setTagGroups)
+        public BaseResponse UpdateNamedUserTags(List<string> namedUserIds, List<TagGroup> addedTagGroups, List<TagGroup> removedTagGroups, List<TagGroup> setTagGroups)
         {
             var tagGroupCount = addedTagGroups?.Count ?? 0 + removedTagGroups?.Count ?? 0 + setTagGroups?.Count ?? 0;
             if (tagGroupCount == 0)
