@@ -78,6 +78,20 @@ namespace UrbanAirSharp
         }
 
         /// <summary>
+        /// Send a Push request. This call can perform the following: 
+        /// <list type="bullet"><item><description>Broadcast to all devices</description></item><item><description>Broadcast to one device type</description></item><item><description>Send to a targeted device</description></item><item><description>Broadcast to all devices with a different alert for each
+        /// type</description></item></list>
+        /// </summary>
+        /// <param name="push">Urban Airship Push object. Use the CreatePush static method to produce this object.</param>
+        /// <returns>
+        /// Service Response
+        /// </returns>
+        public PushResponse Push(Push push)
+        {
+            return SendRequest(new PushRequest(push, serviceModelConfig));
+        }
+
+        /// <summary>
         /// Validates a push request. Duplicates Push without actually sending the alert. See Push
         /// </summary>
         /// <param name="alert">The message to be pushed</param>
