@@ -3,7 +3,9 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UrbanAirSharp.Type;
+using UrbanAirSharp.Utils;
 
 namespace UrbanAirSharp.Dto
 {
@@ -30,9 +32,25 @@ namespace UrbanAirSharp.Dto
         [JsonProperty("in_app")]
         public InApp InApp { get; set; }
 
+        [JsonProperty("audience")]
+        private JToken AudienceString {
+            get
+            {
+                return JsonHelper.RemoveEmptyChildren(JToken.FromObject(Audience));
+            }
+            set
+            {
+                try
+                {
+                    _audience = value.ToObject<Audience>();
+                }
+                catch { }
+            }
+        }
+
 		private Audience _audience;
 
-		[JsonProperty("audience")]
+        [JsonIgnore]
 		public object Audience
 		{
 			get
@@ -51,9 +69,26 @@ namespace UrbanAirSharp.Dto
 			}
 		}
 
-		private IList<DeviceType> _deviceTypes;
+        [JsonProperty("device_types")]
+        private JToken DeviceTypesString
+        {
+            get
+            {
+                return JsonHelper.RemoveEmptyChildren(JToken.FromObject(DeviceTypes));
+            }
+            set
+            {
+                try
+                {
+                    _deviceTypes = value.ToObject<IList<DeviceType>>();
+                }
+                catch { }
+            }
+        }
 
-		[JsonProperty("device_types")]
+        private IList<DeviceType> _deviceTypes;
+
+        [JsonIgnore]
 		public object DeviceTypes {
 			get 
 			{
