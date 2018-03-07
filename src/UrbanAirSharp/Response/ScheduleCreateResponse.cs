@@ -9,7 +9,10 @@ namespace UrbanAirSharp.Response
 {
 	public class ScheduleCreateResponse : BaseResponse
 	{
-		[JsonProperty("schedule_urls")]
+        [JsonProperty("schedule_ids")]
+        public List<string> ScheduleIds { get; set; }
+
+        [JsonProperty("schedule_urls")]
 		public List<string> ScheduleUrls { get; set; }
 
 		[JsonProperty("schedules")]
