@@ -22,7 +22,11 @@ namespace UrbanAirSharp.Request.Base
 			Host = host;
 			HttpClient = httpClient;
 			SerializerSettings = serializerSettings;
-            httpClient.Timeout = TimeSpan.FromMilliseconds(300.0);
+            try
+            {
+                httpClient.Timeout = TimeSpan.FromMilliseconds(300.0);
+            }
+            catch { }
 
 			if (!Host.EndsWith("/"))
 			{
